@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">Added by <a href="{{ url_for('bookmarks.user', username=bookmark.user.username) }}">{{ bookmark.user.username }} </a>
+      {{ moment(bookmark.date).fromNow(refresh = True) }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Bookmark description</h5>
+    <p class="card-text">{{ bookmark.description }}</p>
+    <a href="{{ bookmark.url }}" class="btn btn-primary">Visit</a>
+    <footer class="blockquote-footer">This bookmark was added with the below links.</footer>
+
+    {# Tags #}
+    {% if bookmark.tags %}
+        {% for t in bookmark._tags %}
+            <a class="card-link" href="{{ url_for('bookmarks.tag', name = t) }}">{{ t }}</a>
+        {% endfor %}
+    {% else %}No Tags
+    {% endif %}
+
+    {# Edit & Delete links in the card footer if the user is logged in and the owner. #}
+    {% if current_user == bookmark.user %}
+        <div class="card-footer text-muted">
+            <a href="{{ url_for('bookmarks.edit_bookmark', bookmark_id=bookmark.id) }}">Edit</a>
+            <a href="{{ url_for('bookmarks.delete_bookmark', bookmark_id=bookmark.id) }}">Delete</a>
+        </div>
+    {%  endif %}
+
+  </div>
+</div>
+<br>
+
+
+
+
+
+

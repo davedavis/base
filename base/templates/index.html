@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Thermos - Bookmark & Read Later
+{% endblock %}
+
+{% block content %}
+ <div >
+    <section>
+        <h2>Recently Database Model Entries</h2>
+        {% if new_bookmarks.count() > 0 %}
+            {% with bookmarks = new_bookmarks %}
+                {% include "bookmark_list.html" %}
+            {% endwith %}
+        {% else %}
+            You haven't added anything yet!
+        {% endif %}
+    </section>
+ </div>
+{% endblock %}
